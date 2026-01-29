@@ -12,22 +12,8 @@
     ">1%",
     "not dead"
   ],
-  "comments": {
-    "dependencies": {
-      "yarn": "project"
-    },
-    "devDependencies": {
-      "browserslist": "project",
-      "clipboard": "project",
-      "eslint-config-airbnb": "project",
-      "eslint-config-prettier": "project",
-      "eslint-plugin-jsx-a11y": "project",
-      "husky": "project"
-    }
-  },
-  "dependencies": {
-    "yarn": "^1.22.10"
-  },
+  "packageManager": "yarn@1.22.19",
+  "dependencies": {},
   "devDependencies": {
     "browserslist": "^4.16.5",
     "clipboard": "^2.0.4",
