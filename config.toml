@@ -1,17 +1,40 @@
-[module]
-  [module.hugoVersion]
-    extended = true
-    min = '0.90.0'
+baseURL = "https://1-eq4.pages.dev/"
+languageCode = "en-us"
+title = "My Midnight Blog"
+theme = "midnight"  # Must match the folder name inside themes/ or root if local
+
+paginate = 5
+
+[markup.highlight]
+  noClasses = false
 
 [params]
-  # Enable showing recent posts or any blog-like listing on homepage
-  showRecent = true          # Some forks/variants support this
-  showRecentItems = 5        # Number of posts to show
-  # OR for Terminal-specific params (check your config for existing ones)
-  homeInfoParams = { Title = "Welcome to my Midnight Terminal blog!", Content = "This is the homepage. Posts will appear below or in navigation." }
-  # If there's a menu, add posts section
-[[menu.main]]
-  identifier = "posts"
-  name = "Posts"
-  url = "/posts/"
-  weight = 1
+  contentTypeName = "posts"
+  showMenuItems = 2
+  showLanguageSelector = false
+  fullWidthTheme = false
+  centerTheme = false
+  autoCover = true
+  showLastUpdated = false
+  dateFormat = "2006-01-02"
+
+  homeInfoParams = { 
+    Title = "Welcome to my Midnight Terminal blog!",
+    Content = "This is the homepage. Posts will appear below."
+  }
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    title = "My Midnight Blog"
+
+    [languages.en.params]
+      subtitle = "A retro terminal-style blog"
+      owner = "The"
+      copyright = "© 2026"
+
+    [[languages.en.menu.main]]
+      identifier = "posts"
+      name = "Posts"
+      url = "/posts/"
+      weight = 10

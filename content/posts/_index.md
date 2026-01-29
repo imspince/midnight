@@ -1,7 +1,6 @@
 ﻿---
 title: "Posts"
-date: 2026-01-29T22:50:00+05:30
+date: 2026-01-29T23:00:00+05:30
 draft: false
 ---
-
-All my blog posts are listed here.
+All my blog posts.
