@@ -1,4 +1,4 @@
-# Terminal
+# Terminus
 
 **Demo: https://panr.github.io/hugo-theme-terminal-demo/**
 
