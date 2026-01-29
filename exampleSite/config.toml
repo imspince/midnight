@@ -1,37 +1,61 @@
-baseurl = "https://example.com/"
+baseURL = "https://midnightarcana.in/"
 languageCode = "en-us"
-theme = "hugo-theme-terminal"
-pagination.pagerSize = 5
+theme = "midnight"                         # your fork/theme name
+
+paginate = 5                               # posts per page/list
 
 [markup.goldmark.renderer]
-  unsafe = true
+  unsafe = true                            # allows raw HTML if you want embedded media later
+
+[markup.highlight]
+  noClasses = false                        # required for Chroma syntax highlighting (cool code blocks)
 
 [params]
   contentTypeName = "posts"
-  showMenuItems = 2
-  fullWidthTheme = false
-  centerTheme = false
+  showMenuItems = 3                        # show more menu items before collapse (looks fuller)
+  fullWidthTheme = true                    # wider layout = more terminal "screen" feel
+  centerTheme = true                       # centers content nicely on larger screens
+  autoCover = true                         # auto-use cover.jpg/png in post folders for hero images
+  showLastUpdated = true                   # shows "Updated: date" on posts (retro log feel)
+  updatedDatePrefix = "Last updated"
+  readingTime = true                       # shows "~5 min read" (useful for longer posts)
+  dateFormat = "2006-01-02"
+
+  # Enhanced homepage intro (more dramatic/engaging)
+  homeInfoParams = {
+    Title   = "Midnight Arcana Terminal",
+    Content = "Enter the neon-lit archive.\n\nJ-RPGs, anime, music, late-night thoughts.\nPersona, Final Fantasy, synthwave...\nDive in."
+  }
 
 [languages]
   [languages.en]
-    title = "Terminal"
-    subtitle = "A simple, retro theme for Hugo"
-    keywords = ""
-    copyright = ""
-    menuMore = "Show more"
-    readMore = "Read more"
-    readOtherPosts = "Read other posts"
+    title = "Midnight Arcana"
+    subtitle = "Retro terminal — where weebs code at 3 AM"
+    keywords = "jrpg, persona, anime, music, terminal blog, retro"
+    copyright = "© 2026 Midnight Arcana"
+
+    menuMore = "More..."
+    readMore = "→ Read full entry"
+    readOtherPosts = "Other logs"
 
     [languages.en.params.logo]
-      logoText = "Terminal"
+      logoText = "MIDNIGHT"
       logoHomeLink = "/"
 
-    [languages.en.menu]
-      [[languages.en.menu.main]]
-        identifier = "about"
-        name = "About"
-        url = "/about"
-      [[languages.en.menu.main]]
-        identifier = "showcase"
-        name = "Showcase"
-        url = "/showcase"
+    [[languages.en.menu.main]]
+      identifier = "posts"
+      name       = "Posts"
+      url        = "/posts/"
+      weight     = 10
+
+    [[languages.en.menu.main]]
+      identifier = "about"
+      name       = "About"
+      url        = "/about"
+      weight     = 20
+
+    [[languages.en.menu.main]]
+      identifier = "showcase"
+      name       = "Showcase"
+      url        = "/showcase"
+      weight     = 30

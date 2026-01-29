@@ -1,4 +1,4 @@
-name = "Terminal"
+name = "Midnight Arcana"
 license = "MIT"
 licenselink = "https://github.com/panr/hugo-theme-terminal/blob/master/LICENSE.md"
 description = "A simple, retro theme for Hugo."
@@ -9,5 +9,5 @@ features = ["blog", "shortcode", "syntax highlighting"]
 min_version = 0.90
 
 [author]
-  name = "panr"
-  homepage = "https://rkoziel.com"
+  name = "Spince"
+  homepage = "midnightarcana.in"
