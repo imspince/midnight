@@ -4,7 +4,7 @@
 
 **Create your own color scheme: https://panr.github.io/terminal-css/**
 
-![Terminal](https://github.com/panr/hugo-theme-terminal/blob/master/images/terminal-theme.png?raw=true)
+![Midnight Arcana](https://github.com/panr/hugo-theme-terminal/blob/master/images/terminal-theme.png?raw=true)
 
 ---
 
