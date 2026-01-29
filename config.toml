@@ -2,3 +2,16 @@
   [module.hugoVersion]
     extended = true
     min = '0.90.0'
+
+[params]
+  # Enable showing recent posts or any blog-like listing on homepage
+  showRecent = true          # Some forks/variants support this
+  showRecentItems = 5        # Number of posts to show
+  # OR for Terminal-specific params (check your config for existing ones)
+  homeInfoParams = { Title = "Welcome to my Midnight Terminal blog!", Content = "This is the homepage. Posts will appear below or in navigation." }
+  # If there's a menu, add posts section
+[[menu.main]]
+  identifier = "posts"
+  name = "Posts"
+  url = "/posts/"
+  weight = 1
