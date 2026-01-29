@@ -1,4 +1,4 @@
-# Terminus
+# Midnight Arcana
 
 **Demo: https://panr.github.io/hugo-theme-terminal-demo/**
 
