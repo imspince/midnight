@@ -4,6 +4,4 @@ date: 2026-01-29T22:30:00+05:30
 draft: false
 ---
 
-Welcome to my Midnight Terminal blog!
-
-This is the homepage. Posts will appear below or in navigation.
+Welcome to Midnight Arcana!
