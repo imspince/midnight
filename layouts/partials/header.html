@@ -4,15 +4,33 @@
       {{ partial "logo.html" . }}
     </div>
 
-    <!-- Theme toggle button with ASCII art -->
+    <!-- Theme toggle button with actual SVGs -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle between dark and light mode">
-      <span class="sun-icon ascii">*</span>
-      <span class="moon-icon ascii">o</span>
+      <!-- Sun icon (shown in light mode) -->
+      <img 
+        id="sun-icon" 
+        class="theme-icon sun" 
+        src="{{ "icons/sunny-svgrepo-com.svg" | relURL }}" 
+        alt="Light mode (sun icon)" 
+        width="24" 
+        height="24"
+      >
+
+      <!-- Moon icon (shown in dark mode) -->
+      <img 
+        id="moon-icon" 
+        class="theme-icon moon" 
+        src="{{ "icons/moon-svgrepo-com.svg" | relURL }}" 
+        alt="Dark mode (moon icon)" 
+        width="24" 
+        height="24"
+      >
     </button>
 
     {{ if len $.Site.Menus }}
       {{ partial "mobile-menu.html" . }}
     {{ end }}
+
     {{ if and $.Site.Params.showLanguageSelector (len $.Site.Home.AllTranslations) }}
       {{ partial "language-menu.html" . }}
     {{ end }}
@@ -22,19 +40,20 @@
     {{ partial "menu.html" . }}
   {{ end }}
 
-  <!-- Inline styles – adjusted for ASCII -->
+  <!-- Inline styles – updated for SVGs -->
   <style>
     .theme-toggle {
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 1.4rem;              /* slightly smaller than emoji version */
-      font-family: monospace;         /* matches your terminal theme */
       padding: 0.4rem 0.8rem;
       margin-left: auto;
       color: var(--foreground);
       transition: color 0.2s;
       line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .theme-toggle:hover,
@@ -43,37 +62,31 @@
       outline: none;
     }
 
-    .ascii {
-      font-family: monospace;
-      letter-spacing: 0;
-    }
-
-    /* === Icon visibility === */
-    .sun-icon,
-    .moon-icon {
+    .theme-icon {
       display: none !important;
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      transition: opacity 0.2s;
     }
 
-    [data-theme="light"] .sun-icon {
-      display: inline !important;
+    /* Show correct icon based on theme */
+    [data-theme="light"] #sun-icon {
+      display: inline-block !important;
     }
 
-    [data-theme="light"] .moon-icon {
-      display: none !important;
+    :not([data-theme="light"]) #moon-icon {
+      display: inline-block !important;
     }
 
-    :not([data-theme="light"]) .moon-icon {
-      display: inline !important;
-    }
-
-    :not([data-theme="light"]) .sun-icon {
-      display: none !important;
-    }
-
+    /* Mobile adjustments */
     @media (max-width: 768px) {
       .theme-toggle {
-        font-size: 1.3rem;
         padding: 0.5rem;
+      }
+      .theme-icon {
+        width: 20px;
+        height: 20px;
       }
     }
   </style>
