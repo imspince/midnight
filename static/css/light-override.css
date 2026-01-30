@@ -1,0 +1,21 @@
+/* static/css/light-override.css */
+[data-theme="light"] {
+  --background:      #f8f9fc;
+  --foreground:      #1e1b4b;     /* indigo-ish text */
+  --accent:          #6d28d9;     /* purple accent that pops on light */
+  --muted:           #6b7280;     /* if your theme uses --muted */
+  --border:          #d1d5db;
+  --code-bg:         #f1f5f9;     /* light code blocks */
+  --code-fg:         #1e293b;
+  /* Add more overrides for any other variables your terminal.css uses */
+}
+
+/* Optional: force better readability in light mode */
+[data-theme="light"] pre, [data-theme="light"] code {
+  background: var(--code-bg);
+  color: var(--code-fg);
+}
+
+[data-theme="light"] a:hover {
+  color: var(--accent);
+}
