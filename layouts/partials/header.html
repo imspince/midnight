@@ -4,27 +4,10 @@
       {{ partial "logo.html" . }}
     </div>
 
-    <!-- Theme toggle button with actual SVGs -->
+    <!-- Theme toggle button with simple I / O ASCII -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle between dark and light mode">
-      <!-- Sun icon (shown in light mode) -->
-      <img 
-        id="sun-icon" 
-        class="theme-icon sun" 
-        src="{{ "icons/sunny-svgrepo-com.svg" | relURL }}" 
-        alt="Light mode (sun icon)" 
-        width="24" 
-        height="24"
-      >
-
-      <!-- Moon icon (shown in dark mode) -->
-      <img 
-        id="moon-icon" 
-        class="theme-icon moon" 
-        src="{{ "icons/moon-svgrepo-com.svg" | relURL }}" 
-        alt="Dark mode (moon icon)" 
-        width="24" 
-        height="24"
-      >
+      <span class="light-icon ascii">I</span>
+      <span class="dark-icon ascii">O</span>
     </button>
 
     {{ if len $.Site.Menus }}
@@ -40,20 +23,20 @@
     {{ partial "menu.html" . }}
   {{ end }}
 
-  <!-- Inline styles – updated for SVGs -->
+  <!-- Inline styles – tuned for I / O toggle -->
   <style>
     .theme-toggle {
       background: none;
       border: none;
       cursor: pointer;
+      font-size: 1.5rem;              /* makes I/O stand out nicely */
+      font-family: monospace;
       padding: 0.4rem 0.8rem;
       margin-left: auto;
       color: var(--foreground);
       transition: color 0.2s;
       line-height: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      letter-spacing: 0;
     }
 
     .theme-toggle:hover,
@@ -62,31 +45,35 @@
       outline: none;
     }
 
-    .theme-icon {
+    .ascii {
+      font-family: monospace;
+      font-weight: bold;
+    }
+
+    /* Icon visibility */
+    .light-icon,
+    .dark-icon {
       display: none !important;
-      width: 24px;
-      height: 24px;
-      vertical-align: middle;
-      transition: opacity 0.2s;
     }
 
-    /* Show correct icon based on theme */
-    [data-theme="light"] #sun-icon {
-      display: inline-block !important;
+    [data-theme="light"] .light-icon {
+      display: inline !important;
     }
 
-    :not([data-theme="light"]) #moon-icon {
-      display: inline-block !important;
+    :not([data-theme="light"]) .dark-icon {
+      display: inline !important;
     }
 
-    /* Mobile adjustments */
+    /* Ensure the other one is hidden */
+    [data-theme="light"] .dark-icon,
+    :not([data-theme="light"]) .light-icon {
+      display: none !important;
+    }
+
     @media (max-width: 768px) {
       .theme-toggle {
+        font-size: 1.4rem;
         padding: 0.5rem;
-      }
-      .theme-icon {
-        width: 20px;
-        height: 20px;
       }
     }
   </style>
