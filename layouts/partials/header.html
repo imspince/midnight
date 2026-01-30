@@ -4,8 +4,8 @@
       {{ partial "logo.html" . }}
     </div>
 
-    <!-- Theme toggle button with simple I / O ASCII -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle between dark and light mode">
+    <!-- Theme toggle button with I / O ASCII -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark mode">
       <span class="light-icon ascii">I</span>
       <span class="dark-icon ascii">O</span>
     </button>
@@ -23,20 +23,20 @@
     {{ partial "menu.html" . }}
   {{ end }}
 
-  <!-- Inline styles – tuned for I / O toggle -->
+  <!-- Inline styles for reliable I / O toggle -->
   <style>
     .theme-toggle {
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 1.5rem;              /* makes I/O stand out nicely */
+      font-size: 1.6rem;              /* bigger for visibility */
       font-family: monospace;
+      font-weight: bold;
       padding: 0.4rem 0.8rem;
       margin-left: auto;
       color: var(--foreground);
-      transition: color 0.2s;
+      transition: color 0.3s ease;
       line-height: 1;
-      letter-spacing: 0;
     }
 
     .theme-toggle:hover,
@@ -47,26 +47,33 @@
 
     .ascii {
       font-family: monospace;
-      font-weight: bold;
+      letter-spacing: -1px;           /* tightens I/O look */
     }
 
-    /* Icon visibility */
+    /* Default: show light icon if no theme set yet */
     .light-icon,
     .dark-icon {
-      display: none !important;
+      display: none;
     }
 
+    /* Light mode: show I */
     [data-theme="light"] .light-icon {
       display: inline !important;
     }
 
-    :not([data-theme="light"]) .dark-icon {
+    /* Dark mode: show O */
+    [data-theme="dark"] .dark-icon {
       display: inline !important;
     }
 
-    /* Ensure the other one is hidden */
+    /* Fallback if no data-theme attr exists (show light by default) */
+    html:not([data-theme]) .light-icon {
+      display: inline !important;
+    }
+
+    /* Hide the opposite one explicitly */
     [data-theme="light"] .dark-icon,
-    :not([data-theme="light"]) .light-icon {
+    [data-theme="dark"] .light-icon {
       display: none !important;
     }
 
