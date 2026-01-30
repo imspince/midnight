@@ -4,7 +4,7 @@
       {{ partial "logo.html" . }}
     </div>
 
-    <!-- Theme toggle button: placed here for good visibility in the header row -->
+    <!-- Theme toggle button -->
     <button id="theme-toggle" class="theme-toggle" aria-label="Toggle between dark and light mode">
       <span class="sun-icon">☀️</span>
       <span class="moon-icon">🌙</span>
@@ -22,7 +22,7 @@
     {{ partial "menu.html" . }}
   {{ end }}
 
-  <!-- Inline styles for the toggle – keeps everything in one file for now -->
+  <!-- Inline styles for the toggle button and icon switching -->
   <style>
     .theme-toggle {
       background: none;
@@ -30,8 +30,8 @@
       cursor: pointer;
       font-size: 1.4rem;
       padding: 0.4rem 0.8rem;
-      margin-left: auto;              /* Pushes to the right side of the header__inner */
-      color: var(--foreground);       /* Matches your theme's text color */
+      margin-left: auto;              /* Pushes button to the right */
+      color: var(--foreground);
       transition: color 0.2s;
     }
 
@@ -41,13 +41,21 @@
       outline: none;
     }
 
-    /* Show correct icon based on current theme */
-    [data-theme="light"] .moon-icon,
-    :not([data-theme="light"]) .sun-icon {
+    /* Icon visibility - fixed version */
+    .sun-icon,
+    .moon-icon {
       display: none;
     }
 
-    /* Optional: make sure it looks good on small screens */
+    [data-theme="light"] .sun-icon {
+      display: inline;
+    }
+
+    :not([data-theme="light"]) .moon-icon {
+      display: inline;
+    }
+
+    /* Responsive adjustment */
     @media (max-width: 768px) {
       .theme-toggle {
         font-size: 1.3rem;
