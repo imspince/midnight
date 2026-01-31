@@ -1,5 +1,3 @@
 [params]
   # ... your existing params ...
   autoCover = true   # Enables automatic use of cover.(jpg|png|webp) images in post folders
-
-  customJS = ["js/custom.js"]
