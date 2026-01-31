@@ -1,3 +1,13 @@
 [params]
   # ... your existing params ...
   autoCover = true   # Enables automatic use of cover.(jpg|png|webp) images in post folders
+
+[languages]
+  [languages.en]
+    # ... other settings you already have ...
+
+    [[languages.en.menu.main]]
+      identifier = "about"          # This identifier is key – theme looks for "about" to style as "i" icon
+      name       = "About"          # Visible text if shown in full menu
+      url        = "/about/"        # ← This makes the icon link to your About page
+      weight     = 5                # Low number = appears early/left in header
