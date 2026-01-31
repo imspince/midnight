@@ -3,12 +3,14 @@
     {{ if $.Site.Copyright }}
       <div class="copyright copyright--user">
         <span>{{ $.Site.Copyright | safeHTML }}</span>
-    {{ else }}
-      <div class="copyright">
-        <span>© {{ now.Year }} Powered by <a href="https://github.com/imspince">Spince</a></span>
-    {{ end }}
-      
-      </div>
+      {{ else }}
+        <div class="copyright">
+          <span>
+            © {{ now.Year }} Powered by <a href="https://github.com/imspince">Spince</a>
+            • <a href="/about/">About</a>   <!-- About link added here -->
+          </span>
+        </div>
+      {{ end }}
   </div>
 </footer>
 
