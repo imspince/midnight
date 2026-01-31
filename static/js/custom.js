@@ -1,24 +1,62 @@
-// static/js/custom.js - Add this file in static/js/
+// static/js/auto-border.js
 
 function getDominantColor(img) {
   const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  canvas.height = 1;
   canvas.width = 1;
+  canvas.height = 1;
+  const ctx = canvas.getContext('2d');
   ctx.drawImage(img, 0, 0, 1, 1);
-  const i = ctx.getImageData(0, 0, 1, 1).data.slice(0,3);
-  return `rgb(${i[0]}, ${i[1]}, ${i[2]})`;
+  const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+  return `rgb(${r}, ${g}, ${b})`;
 }
 
-// Find the cover image and container (adjust selectors based on your theme's HTML)
-document.addEventListener('DOMContentLoaded', () => {
-  const coverImg = document.querySelector('.post-cover img');  // Or '.cover-image', inspect your site to get the exact class
-  if (coverImg) {
-    coverImg.crossOrigin = "Anonymous";  // If needed for cross-origin images
-    coverImg.onload = () => {
-      const dominantColor = getDominantColor(coverImg);
-      const container = coverImg.parentElement;  // Or the div with the border
-      container.style.borderColor = dominantColor;
-    };
+function updateCoverBorder() {
+  // Try several possible selectors used in Terminal/Midnight themes
+  const selectors = [
+    '.post-cover img',
+    '.cover img',
+    '.featured-image img',
+    '.post-header img',
+    'img.cover-image'
+  ];
+
+  let coverImg = null;
+  for (const sel of selectors) {
+    coverImg = document.querySelector(sel);
+    if (coverImg) break;
   }
-});
+
+  if (!coverImg) return;
+
+  // Make sure we can read the image data
+  coverImg.crossOrigin = "Anonymous";
+
+  // If already loaded, update immediately
+  if (coverImg.complete && coverImg.naturalWidth > 0) {
+    const color = getDominantColor(coverImg);
+    const container = coverImg.closest('figure, .post-cover, .cover, .featured-image, .post-header');
+    if (container) {
+      container.style.borderColor = color;
+      container.style.borderWidth = '4px';      // optional: thicker border
+      container.style.borderStyle = 'solid';
+    }
+  } else {
+    // Wait for load
+    coverImg.addEventListener('load', () => {
+      const color = getDominantColor(coverImg);
+      const container = coverImg.closest('figure, .post-cover, .cover, .featured-image, .post-header');
+      if (container) {
+        container.style.borderColor = color;
+        container.style.borderWidth = '4px';
+        container.style.borderStyle = 'solid';
+      }
+    });
+  }
+}
+
+// Run immediately + watch for dynamic content (Hugo themes sometimes load late)
+document.addEventListener('DOMContentLoaded', updateCoverBorder);
+
+// MutationObserver for SPA-like or delayed content
+const observer = new MutationObserver(updateCoverBorder);
+observer.observe(document.body, { childList: true, subtree: true });
