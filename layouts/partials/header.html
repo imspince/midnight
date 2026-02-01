@@ -1,61 +1,63 @@
+<!-- Inline styles – Dark mode default + right-aligned toggle -->
 <style>
-.theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.8rem;          /* Slightly bigger for tap-friendliness */
-  font-family: monospace;
-  font-weight: bold;
-  padding: 0.5rem 0.9rem;
-  margin-left: auto;
-  color: var(--foreground);
-  transition: color 0.3s ease, transform 0.1s ease;
-  line-height: 1;
-}
-
-.theme-toggle:hover,
-.theme-toggle:focus {
-  color: var(--accent);
-  transform: scale(1.1);      /* Tiny feedback — optional but nice */
-  outline: none;
-}
-
-/* Hide both icons by default */
-.light-icon,
-.dark-icon {
-  display: show;
-}
-
-/* Light mode: show I */
-[data-theme="light"] .light-icon {
-  display: inline;
-}
-
-/* Dark mode: show O */
-[data-theme="dark"] .dark-icon {
-  display: inline;
-}
-
-/* Fallback: prefer light if no theme is set yet */
-html:not([data-theme]) .dark-icon {
-  display: inline;
-}
-
-/* Explicitly hide the opposite (helps if JS flips quickly) */
-[data-theme="light"] .dark-icon,
-[data-theme="dark"] .light-icon {
-  display: none;
-}
-
-.ascii {
-  letter-spacing: -1px;       /* Tightens I/O appearance */
-}
-
-/* Optional: subtle "button" container feel on mobile */
-@media (max-width: 768px) {
   .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
     font-size: 1.6rem;
-    padding: 0.6rem;
+    font-family: monospace;
+    font-weight: bold;
+    padding: 0.4rem 0.8rem;
+    margin-left: auto;          /* ← This keeps it on the far right */
+    color: var(--foreground);
+    transition: color 0.3s ease, transform 0.1s ease;
+    line-height: 1;
   }
-}
+
+  .theme-toggle:hover,
+  .theme-toggle:focus {
+    color: var(--accent);
+    transform: scale(1.08);     /* subtle clickable feel */
+    outline: none;
+  }
+
+  /* Hide both icons by default */
+  .light-icon,
+  .dark-icon {
+    display: none;
+  }
+
+  /* Default/fallback: show DARK mode ("O") when no theme is set yet */
+  html:not([data-theme]) .dark-icon {
+    display: inline;
+  }
+
+  /* Explicit dark mode */
+  [data-theme="dark"] .dark-icon {
+    display: inline;
+  }
+
+  [data-theme="dark"] .light-icon {
+    display: none;
+  }
+
+  /* Light mode (when user toggles to it) */
+  [data-theme="light"] .light-icon {
+    display: inline;
+  }
+
+  [data-theme="light"] .dark-icon {
+    display: none;
+  }
+
+  .ascii {
+    letter-spacing: -1px;       /* tight I/O look */
+  }
+
+  @media (max-width: 768px) {
+    .theme-toggle {
+      font-size: 1.4rem;
+      padding: 0.5rem;
+    }
+  }
 </style>
