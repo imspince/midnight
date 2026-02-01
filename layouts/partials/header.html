@@ -1,63 +1,89 @@
-<!-- Inline styles – Dark mode default + right-aligned toggle -->
-<style>
-  .theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 1.6rem;
-    font-family: monospace;
-    font-weight: bold;
-    padding: 0.4rem 0.8rem;
-    margin-left: auto;          /* ← This keeps it on the far right */
-    color: var(--foreground);
-    transition: color 0.3s ease, transform 0.1s ease;
-    line-height: 1;
-  }
+<header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      {{ partial "logo.html" . }}
+    </div>
 
-  .theme-toggle:hover,
-  .theme-toggle:focus {
-    color: var(--accent);
-    transform: scale(1.08);     /* subtle clickable feel */
-    outline: none;
-  }
+    <!-- Theme toggle button with I / O ASCII – your original markup -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark mode">
+      <span class="light-icon ascii">I</span>
+      <span class="dark-icon ascii">O</span>
+    </button>
 
-  /* Hide both icons by default */
-  .light-icon,
-  .dark-icon {
-    display: none;
-  }
+    {{ if len $.Site.Menus }}
+      {{ partial "mobile-menu.html" . }}
+    {{ end }}
 
-  /* Default/fallback: show DARK mode ("O") when no theme is set yet */
-  html:not([data-theme]) .dark-icon {
-    display: inline;
-  }
+    {{ if and $.Site.Params.showLanguageSelector (len $.Site.Home.AllTranslations) }}
+      {{ partial "language-menu.html" . }}
+    {{ end }}
+  </div>
 
-  /* Explicit dark mode */
-  [data-theme="dark"] .dark-icon {
-    display: inline;
-  }
+  {{ if len $.Site.Menus }}
+    {{ partial "menu.html" . }}
+  {{ end }}
 
-  [data-theme="dark"] .light-icon {
-    display: none;
-  }
-
-  /* Light mode (when user toggles to it) */
-  [data-theme="light"] .light-icon {
-    display: inline;
-  }
-
-  [data-theme="light"] .dark-icon {
-    display: none;
-  }
-
-  .ascii {
-    letter-spacing: -1px;       /* tight I/O look */
-  }
-
-  @media (max-width: 768px) {
+  <!-- Fixed inline styles: dark default, right-aligned, no flicker -->
+  <style>
     .theme-toggle {
-      font-size: 1.4rem;
-      padding: 0.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.6rem;
+      font-family: monospace;
+      font-weight: bold;
+      padding: 0.4rem 0.8rem;
+      margin-left: auto;               /* keeps button on the right */
+      color: var(--foreground);
+      transition: color 0.3s ease, transform 0.1s ease;
+      line-height: 1;
     }
-  }
-</style>
+
+    .theme-toggle:hover,
+    .theme-toggle:focus {
+      color: var(--accent);
+      transform: scale(1.08);          /* small feedback so it feels clickable */
+      outline: none;
+    }
+
+    /* Hide both icons by default */
+    .light-icon,
+    .dark-icon {
+      display: none;
+    }
+
+    /* Default: dark mode when no theme is set yet (first load / incognito) */
+    html:not([data-theme]) .dark-icon {
+      display: inline;
+    }
+
+    /* Dark mode (explicit or saved) */
+    [data-theme="dark"] .dark-icon {
+      display: inline;
+    }
+
+    [data-theme="dark"] .light-icon {
+      display: none;
+    }
+
+    /* Light mode (only when user switches to it) */
+    [data-theme="light"] .light-icon {
+      display: inline;
+    }
+
+    [data-theme="light"] .dark-icon {
+      display: none;
+    }
+
+    .ascii {
+      letter-spacing: -1px;            /* makes I and O look tighter/natural */
+    }
+
+    @media (max-width: 768px) {
+      .theme-toggle {
+        font-size: 1.4rem;
+        padding: 0.5rem;
+      }
+    }
+  </style>
+</header>
