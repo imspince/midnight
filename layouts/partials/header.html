@@ -4,8 +4,8 @@
       {{ partial "logo.html" . }}
     </div>
 
-    <!-- Theme toggle button with I / O ASCII – your original markup -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark mode">
+    <!-- Theme toggle – Sun (light) / Moon (dark) -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle between light and dark mode">
       <span class="light-icon ascii">☼</span>
       <span class="dark-icon ascii">☾</span>
     </button>
@@ -23,41 +23,37 @@
     {{ partial "menu.html" . }}
   {{ end }}
 
-  <!-- Fixed inline styles: dark default, right-aligned, no flicker -->
+  <!-- All-in-one styles: dark default, size-fixed symbols, right-aligned -->
   <style>
     .theme-toggle {
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 1.6rem;
+      font-size: 1.7rem;                /* slightly larger base for symbols */
       font-family: monospace;
       font-weight: bold;
-      padding: 0.4rem 0.8rem;
-      margin-left: auto;               /* keeps button on the right */
+      padding: 0.4rem 0.9rem;
+      margin-left: auto;                /* keeps it pinned to the right */
       color: var(--foreground);
-      transition: color 0.3s ease, transform 0.1s ease;
+      transition: color 0.3s ease, transform 0.15s ease;
       line-height: 1;
     }
 
     .theme-toggle:hover,
     .theme-toggle:focus {
       color: var(--accent);
-      transform: scale(1.08);          /* small feedback so it feels clickable */
+      transform: scale(1.1);
       outline: none;
     }
 
-    /* Hide both icons by default */
+    /* Hide both by default */
     .light-icon,
     .dark-icon {
       display: none;
     }
 
-    /* Default: dark mode when no theme is set yet (first load / incognito) */
-    html:not([data-theme]) .dark-icon {
-      display: inline;
-    }
-
-    /* Dark mode (explicit or saved) */
+    /* Dark mode default / fallback when no theme is set */
+    html:not([data-theme]) .dark-icon,
     [data-theme="dark"] .dark-icon {
       display: inline;
     }
@@ -66,7 +62,7 @@
       display: none;
     }
 
-    /* Light mode (only when user switches to it) */
+    /* Light mode */
     [data-theme="light"] .light-icon {
       display: inline;
     }
@@ -75,14 +71,43 @@
       display: none;
     }
 
+    /* Fix symbol size & alignment – most important part */
     .ascii {
-      letter-spacing: -1px;            /* makes I and O look tighter/natural */
+      display: inline-block;
+      width: 1.1em;                     /* adjust 1.05–1.15 if needed */
+      height: 1.1em;
+      line-height: 1;
+      text-align: center;
+      vertical-align: middle;
+      letter-spacing: normal;           /* reset for symbols */
+      font-family: monospace, 
+                   'Segoe UI Symbol', 
+                   'Noto Sans Symbols', 
+                   'Apple Symbols', 
+                   sans-serif;
+    }
+
+    /* Optional: tiny size tweak if ☼ still looks smaller in your font */
+    [data-theme="light"] .light-icon.ascii {
+      font-size: 1.12em;                /* nudge sun up a bit if needed */
     }
 
     @media (max-width: 768px) {
       .theme-toggle {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
         padding: 0.5rem;
+      }
+      .ascii {
+        width: 1em;
+        height: 1em;
+      }
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .theme-toggle,
+      .ascii {
+        transition: none;
       }
     }
   </style>
