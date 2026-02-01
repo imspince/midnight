@@ -23,7 +23,7 @@
 /* Hide both icons by default */
 .light-icon,
 .dark-icon {
-  display: none;
+  display: show;
 }
 
 /* Light mode: show I */
@@ -37,7 +37,7 @@
 }
 
 /* Fallback: prefer light if no theme is set yet */
-html:not([data-theme]) .light-icon {
+html:not([data-theme]) .dark-icon {
   display: inline;
 }
 
