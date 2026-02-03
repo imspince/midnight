@@ -1,6 +1,7 @@
 ﻿---
-title: "Posts"
-date: 2026-01-29T23:00:00+05:30
-draft: false
+title: "All Posts Archive"
+url: "/posts/"
+paginator: false  # ← this disables any limit/pagination on this page
 ---
-All my blog posts.
+
+Full chronological archive — no limits here.

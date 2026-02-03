@@ -1,66 +1,31 @@
 {{ define "main" }}
-  {{ if .Content }}
-    <div class="index-content {{ if .Params.framed -}}framed{{- end -}}">
-      {{ .Content }}
-    </div>
-  {{ end }}
-  <div class="posts">
-    {{ $isntDefault := not (or (eq (trim $.Site.Params.contentTypeName " ") "posts") (eq (trim $.Site.Params.contentTypeName " ") "")) }}
-    {{ $contentTypeName := cond $isntDefault (string $.Site.Params.contentTypeName) "posts" }}
 
-    {{ $PageContext := . }}
-    {{ if .IsHome }}
-      {{ $PageContext = .Site }}
-    {{ end }}
-    {{ $paginator := .Paginate (where $PageContext.RegularPages "Type" $contentTypeName) }}
+  <main>
 
-    {{ range $paginator.Pages }}
-      <article class="post on-list">
-        <h2 class="post-title">
-          <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
-        </h2>
+    <h1>Midnight Arcana (override test)</h1>
 
-        <div class="post-meta">
-          {{- if .Date -}}
-            <time class="post-date">
-              {{- partial "post-date" . -}}
-            </time>
-          {{- end -}}
-          {{- with .Params.Author -}}
-            <span class="post-author">{{ . }}</span>
-          {{- end -}}
-        </div>
+    <section>
+      {{ $posts := where site.RegularPages "Section" "posts" }}
+      {{ $sorted := $posts.ByDate.Reverse }}
 
-        {{ if .Params.tags }}
-          <span class="post-tags">
-            {{ range .Params.tags }}
-            #<a href="{{ (urlize (printf "tags/%s/" . )) | absLangURL }}">
-              {{- . -}}
-            </a>&nbsp;
-            {{ end }}
-          </span>
-        {{ end }}
+      {{ range first 5 $sorted }}
+        <article>
+          <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+          <time>{{ .Date.Format "Jan 2, 2006" }}</time>
+          <p>{{ .Summary | safeHTML }}</p>
+          <a href="{{ .RelPermalink }}">Read more →</a>
+        </article>
+      {{ end }}
 
-        {{ partial "cover.html" . }}
+      {{ if gt (len $sorted) 5 }}
+        <p style="text-align: center; margin-top: 3rem; font-size: 1.3rem;">
+          <a href="/posts/" style="color: var(--accent); text-decoration: underline;">
+            → View All {{ len $sorted }} Posts (Older ones here)
+          </a>
+        </p>
+      {{ end }}
+    </section>
 
-        <div class="post-content">
-          {{ if .Params.showFullContent }}
-            {{ .Content }}
-          {{ else if .Description }}
-            <p>{{ .Description | markdownify }}</p>
-          {{ else }}
-            {{ .Summary }}
-          {{ end }}
-        </div>
+  </main>
 
-        {{ if not .Params.showFullContent }}
-          <div>
-            <a class="read-more button inline" href="{{ .RelPermalink }}">[{{ $.Site.Params.ReadMore }}]</a>
-          </div>
-        {{ end }}
-      </article>
-    {{ end }}
-
-    {{ partial "pagination.html" . }}
-  </div>
 {{ end }}

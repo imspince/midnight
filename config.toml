@@ -1,4 +1,39 @@
-[params]
-  # ... your existing params ...
-  autoCover = true   # Enables automatic use of cover.(jpg|png|webp) images in post folders
+# ====================
+# Basic site settings
+# ====================
+baseURL = "https://midnightarcana.in/"
+languageCode = "en-us"
+title = "Midnight Arcana"
 
+# IMPORTANT: Comment out or REMOVE this line to stop Hugo from treating "midnight" as a module
+# theme = "midnight"   # ← Comment this out (add # in front) or delete the line entirely
+
+# ====================
+# Params (your existing setting + any others)
+# ====================
+[params]
+  autoCover = true   # keep this – auto cover images
+
+  # Optional: add any other params you had before, e.g.
+  # dateFormat       = "January 2, 2006"
+  # showReadingTime  = true
+  # etc.
+
+# ====================
+# Pagination (to show many/all posts on list pages like /posts/)
+# ====================
+[pagination]
+  pagerSize = 999    # high limit so /posts/ etc. show everything (or most)
+
+# ====================
+# If you have other sections (menu, taxonomies, outputs, etc.), add them here unchanged
+# Example placeholders – keep or remove as needed
+# [menu]
+#   [[menu.main]]
+#     name = "Home"
+#     url  = "/"
+#     weight = 1
+
+# [taxonomies]
+#   tag      = "tags"
+#   category = "categories"
