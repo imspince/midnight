@@ -18,7 +18,7 @@
                 {{ .Date.Format "January 2, 2006" }}
               </time>
               {{ if .ReadingTime }}
-                <span> {{ .ReadingTime }} min read</span>
+                <span> — {{ .ReadingTime }} min read</span>
               {{ end }}
             </div>
           </header>
@@ -31,7 +31,6 @@
         </article>
       {{ end }}
 
-      <!-- Older Posts button – centered -->
       {{ if gt (len $sorted) 5 }}
         <div class="older-posts-container">
           <a href="/posts/" class="older-posts-button button inline">
