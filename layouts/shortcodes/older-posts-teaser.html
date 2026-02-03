@@ -1,0 +1,10 @@
+{{ $posts := where site.RegularPages "Section" "posts" }}
+{{ $count := len $posts }}
+
+{{ if gt $count 5 }}
+  <div style="text-align: center; margin: 5rem 0 3rem;">
+    <a href="/posts/" class="button inline">
+      Older Posts → ({{ $count }} total)
+    </a>
+  </div>
+{{ end }}
