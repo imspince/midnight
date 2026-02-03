@@ -1,34 +1,35 @@
-.older-posts-container {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 100% !important;
-  max-width: 100% !important;           /* prevents overflow issues */
-  margin: 5rem auto 4rem !important;    /* auto centers horizontally */
-  padding: 1.5rem 0 !important;
-  border-top: 1px dashed #555 !important;
-  text-align: center !important;        /* fallback for older browsers */
+/* Older Posts in footer – only visible on homepage */
+.older-posts-footer {
+  text-align: center;
+  margin: 3rem 0 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed var(--foreground-muted, #555);
+  opacity: 0.9;
 }
 
 .older-posts-button {
-  display: inline-flex !important;
-  align-items: center !important;
+  display: inline-flex;
+  align-items: center;
   gap: 0.6rem;
-  padding: 0.9rem 2rem;
-  font-size: 1.2rem;
+  padding: 0.75rem 1.8rem;
+  font-size: 1.1rem;
+  font-family: monospace;
   color: var(--foreground);
-  border: 1px solid #666;
-  border-radius: 6px;
+  border: 1px solid var(--foreground-muted, #666);
+  border-radius: 4px;
   text-decoration: none;
-  background: rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  white-space: nowrap;                  /* prevents text wrap breaking center */
+  background: rgba(0, 0, 0, 0.2);
+  transition: all 0.25s ease;
 }
 
 .older-posts-button:hover {
   color: var(--accent, #0f0);
   border-color: var(--accent, #0f0);
-  background: rgba(0, 255, 0, 0.1);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 255, 0, 0.2);
+  background: rgba(0, 255, 0, 0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 255, 0, 0.15);
+}
+
+.older-posts-button .arrow {
+  font-weight: bold;
 }

@@ -1,25 +1,40 @@
 <footer class="footer">
   <div class="footer__inner">
+
+    <!-- Older Posts button – only on homepage, centered -->
+    {{ if .IsHome }}
+      {{ $posts := where site.RegularPages "Section" "posts" }}
+      {{ $count := len $posts }}
+      {{ if gt $count 5 }}
+        <div class="older-posts-footer">
+          <a href="/posts/" class="older-posts-button button inline">
+            Older Posts → ({{ $count }} total)
+          </a>
+        </div>
+      {{ end }}
+    {{ end }}
+
+    <!-- Existing copyright / about section -->
     {{ if $.Site.Copyright }}
       <div class="copyright copyright--user">
         <span>{{ $.Site.Copyright | safeHTML }}</span>
-      {{ else }}
-        <div class="copyright">
-          <span>
-            © {{ now.Year }} Powered by <a href="https://github.com/imspince">Spince</a>
-            • <a href="/about/">About</a>   <!-- About link added here -->
-          </span>
-        </div>
-      {{ end }}
+      </div>
+    {{ else }}
+      <div class="copyright">
+        <span>
+          © {{ now.Year }} Powered by <a href="https://github.com/imspince">Spince</a>
+          • <a href="/about/">About</a>
+        </span>
+      </div>
+    {{ end }}
+
   </div>
 </footer>
 
 {{ $menu := resources.Get "js/menu.js" | js.Build }}
 {{ $cp := resources.Get "js/code.js" | js.Build }}
-
 {{ $bundle := slice $menu $cp | resources.Concat "bundle.js" | resources.Minify }}
-
 <script type="text/javascript" src="{{ $bundle.RelPermalink }}"></script>
 
-<!-- Extended footer section-->
+<!-- Extended footer section (keep whatever is in your partial) -->
 {{ partial "extended_footer.html" . }}
