@@ -1,0 +1,27 @@
+.header-search {
+  margin-top: 0.75rem;
+}
+
+#siteSearch {
+  width: 100%;
+  padding: 8px 10px;
+  background: #0f0f0f;
+  color: #fff;
+  border: 1px solid #333;
+  border-radius: 6px;
+}
+
+#searchResults {
+  margin-top: 0.5rem;
+}
+
+#searchResults a {
+  display: block;
+  padding: 6px 0;
+  color: #aaa;
+  text-decoration: none;
+}
+
+#searchResults a:hover {
+  color: #fff;
+}
