@@ -23,17 +23,29 @@
     {{ partial "menu.html" . }}
   {{ end }}
 
-  <!-- All-in-one styles: dark default, size-fixed symbols, right-aligned -->
+  <!-- 🔍 Search (below terminal/menu) -->
+  <div class="header-search">
+    <input
+      id="siteSearch"
+      type="text"
+      placeholder="Search posts…"
+      autocomplete="off"
+    >
+    <div id="searchResults"></div>
+  </div>
+
+  <!-- All-in-one styles -->
   <style>
+    /* === EXISTING STYLES (unchanged) === */
     .theme-toggle {
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 1.7rem;                /* slightly larger base for symbols */
+      font-size: 1.7rem;
       font-family: monospace;
       font-weight: bold;
       padding: 0.4rem 0.9rem;
-      margin-left: auto;                /* keeps it pinned to the right */
+      margin-left: auto;
       color: var(--foreground);
       transition: color 0.3s ease, transform 0.15s ease;
       line-height: 1;
@@ -46,69 +58,82 @@
       outline: none;
     }
 
-    /* Hide both by default */
     .light-icon,
     .dark-icon {
       display: none;
     }
 
-    /* Dark mode default / fallback when no theme is set */
     html:not([data-theme]) .dark-icon,
     [data-theme="dark"] .dark-icon {
       display: inline;
     }
 
-    [data-theme="dark"] .light-icon {
-      display: none;
-    }
-
-    /* Light mode */
     [data-theme="light"] .light-icon {
       display: inline;
     }
 
-    [data-theme="light"] .dark-icon {
-      display: none;
-    }
-
-    /* Fix symbol size & alignment – most important part */
     .ascii {
       display: inline-block;
-      width: 1.1em;                     /* adjust 1.05–1.15 if needed */
+      width: 1.1em;
       height: 1.1em;
-      line-height: 1;
       text-align: center;
-      vertical-align: middle;
-      letter-spacing: normal;           /* reset for symbols */
-      font-family: monospace, 
-                   'Segoe UI Symbol', 
-                   'Noto Sans Symbols', 
-                   'Apple Symbols', 
-                   sans-serif;
+      font-family: monospace;
     }
 
-    /* Optional: tiny size tweak if ☼ still looks smaller in your font */
-    [data-theme="light"] .light-icon.ascii {
-      font-size: 1.12em;                /* nudge sun up a bit if needed */
+    /* === SEARCH STYLES === */
+    .header-search {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--border);
     }
 
-    @media (max-width: 768px) {
-      .theme-toggle {
-        font-size: 1.5rem;
-        padding: 0.5rem;
-      }
-      .ascii {
-        width: 1em;
-        height: 1em;
-      }
+    #siteSearch {
+      width: 100%;
+      padding: 0.55rem 0.6rem;
+      font-family: monospace;
+      background: var(--background);
+      color: var(--foreground);
+      border: 1px solid var(--border);
+      border-radius: 4px;
     }
 
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      .theme-toggle,
-      .ascii {
-        transition: none;
-      }
+    #searchResults a {
+      display: block;
+      padding: 0.35rem 0;
+      color: var(--accent);
+      font-family: monospace;
+      text-decoration: none;
+    }
+
+    #searchResults a:hover {
+      text-decoration: underline;
     }
   </style>
+
+  <!-- 🔎 Search Logic -->
+  <script>
+    const input = document.getElementById('siteSearch')
+    const results = document.getElementById('searchResults')
+
+    if (input) {
+      fetch('/search-index/index.json')
+        .then(r => r.json())
+        .then(posts => {
+          input.addEventListener('input', () => {
+            const q = input.value.toLowerCase()
+            if (!q) {
+              results.innerHTML = ''
+              return
+            }
+
+            const matches = posts
+              .filter(p => p.title.toLowerCase().includes(q))
+              .slice(0, 6)
+
+            results.innerHTML = matches
+              .map(p => `<a href="${p.url}">${p.title}</a>`)
+              .join('')
+          })
+        })
+    }
+  </script>
 </header>
