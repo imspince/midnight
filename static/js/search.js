@@ -1,7 +1,7 @@
 let posts = []
 let fuse
 
-fetch('/index.json')
+fetch('/search-index/index.json')
   .then(res => res.json())
   .then(data => {
     posts = data
